@@ -2430,9 +2430,9 @@ elif page == "Basic Plots":
     plt.close(fig)
 
     st.markdown("""
-    The histogram shows the distribution of CAGR across companies. 
-    The second plot uses the same variable but clips extreme outliers to make the central part 
-    of the distribution easier to read.
+The figure shows the distribution of CAGR values across the companies in the dataset. CAGR represents the average annual rate at which a company’s stock price increased or decreased during the available observation period. The histogram shows the number of companies in each CAGR interval, while the smooth density curve shows the general shape of the distribution.
+Most CAGR values are concentrated close to zero, mainly between approximately −20% and 25%. This means that most companies had moderate negative or positive average annual returns. The highest concentration is located slightly below zero, so small negative CAGR values are common in the sample. At the same time, several extreme observations can be seen near −45% and 45%. The second graph uses a narrower visible range to reduce the effect of these extreme values and make the central part of the distribution easier to examine. It shows that the distribution includes both negative and positive CAGR values and is slightly extended toward the positive side.
+
     """)
 
     # ─────────────────────────────────────
@@ -2468,8 +2468,8 @@ elif page == "Basic Plots":
     plt.close(fig)
 
     st.markdown("""
-    This line plot shows the average percentage of internet users across countries over time.
-    The trend helps to describe the macroeconomic background of global e-commerce growth.
+It is the average share of internet users across the countries in the dataset from 2010 to 2025. The values were grouped by year, and the mean internet usage percentage was calculated for each year. A clear upward trend can be observed between 2010 and 2024. Average internet usage increased from approximately 58% in 2010 to about 88% in 2024. The growth was gradual throughout most of the period. Faster increases can be seen between 2012 and 2016 and again between 2017 and 2020.
+The highest value was reached in 2024. In 2025, the average decreased to approximately 81%. This final decline should be interpreted carefully because the 2025 data may be incomplete or may contain observations for fewer countries than the previous years. 
     """)
 
     # ─────────────────────────────────────
@@ -2520,8 +2520,10 @@ elif page == "Basic Plots":
     plt.close(fig)
 
     st.markdown("""
-    This bar chart shows how the average operating margin changed across fiscal years.
-    Positive values indicate profitable core operations, while negative values indicate operating losses.
+A clear upward trend can be observed in rhe average operating margin. The average operating margin was −3.5% in 2022 and improved to −1.0% in 2023. In 2024, it became positive and reached 7.2%. Further growth is shown in 2025 and 2026, when the average margin increased to 8.7% and 11.0%, respectively.
+Overall, the average operating margin increased by 14.5 percentage points between 2022 and 2026. The main change occurred between 2023 and 2024, when the value rose by 8.2 percentage points and moved from negative to positive. This indicates a clear improvement in the average operating results of the observations included in each fiscal year.
+The results for 2025 and 2026 should be interpreted carefully if these years contain fewer company observations or incomplete financial reports. In that case, the later averages may not be directly comparable with the earlier years.
+
     """)
 
     # ─────────────────────────────────────
@@ -2572,8 +2574,10 @@ elif page == "Basic Plots":
     plt.close(fig)
 
     st.markdown("""
-    The violin plot compares operating margin distributions for companies that report R&D expenses 
-    and companies that do not report them. The black dots show individual observations.
+ This figure compares the distribution of operating margins for company-year observations with and without reported R&D expenditure. For companies without reported R&D, most operating margins are concentrated close to 0%, although both negative and positive values are present. The main group is located approximately between −20% and 20%. Several higher observations reach about 50%–60%, while some negative observations fall below −50%. This group has a wide central concentration and a noticeable positive upper tail.
+For companies that report R&D, most observations are also concentrated around small positive and negative margins. A large part of the data is located approximately between −15% and 25%, with the highest concentration slightly above 0%. However, several strongly negative observations are visible. Two observations are located near −70%, and one extreme value is close to −270%. This observation creates the very long lower tail of the violin and strongly increases the visible range of the graph.
+In both groups, many operating margins are located close to zero, so the graph does not show a clear separation between companies that report R&D and those that do not. 
+
     """)
 
     # ─────────────────────────────────────
@@ -2641,10 +2645,11 @@ elif page == "Basic Plots":
     plt.close(fig)
 
     st.markdown("""
-    This scatter plot compares the average total revenue and average total assets of e-commerce
-    companies across fiscal years. Revenue reflects business activity, while assets represent
-    the overall size of the companies. The two series follow similar trends, suggesting that
-    larger firms tend to generate higher revenues.
+The figure compares the average total revenue and average total assets of e-commerce companies by fiscal year. Both indicators are measured in US dollars. The vertical axis uses scientific notation, where 1e12 represents one trillion USD.
+Average total assets were higher than average revenue in every fiscal year. In 2022, average assets reached approximately 4.4 trillion USD, while average revenue was about 0.44 trillion USD. A sharp decline in average assets was observed in 2023, when the value fell to approximately 1.9 trillion USD. Between 2023 and 2025, average assets remained relatively stable, ranging from about 1.75 to 1.9 trillion USD.
+Average revenue followed a more stable upward trend from 2022 to 2025. It increased from approximately 0.44 trillion USD in 2022 to around 0.47 trillion USD in 2023, 0.51 trillion USD in 2024, and 0.58 trillion USD in 2025.
+In 2026, both indicators declined sharply and became close to each other at approximately 0.1–0.15 trillion USD. This final result should be interpreted carefully because the 2026 financial data may contain fewer company observations or incomplete annual reports.
+
     """)
 
 # ══════════════════════════════════════════
@@ -2840,55 +2845,81 @@ elif page == "Detailed Overview":
 
         st.markdown("""
 CAGR Distribution by Business Segment
+                    
+
 The figure compares the distribution of CAGR values across five business segments:
+
+                    
 •	Marketplace + Cloud;
 •	Fashion;
 •	Food Delivery;
 •	Marketplace + Fintech;
 •	Payments.
+                    
+
 Logic Used to Construct the Figure
+                    
+
 The graph was constructed from the company-level CAGR values and the business segment variable segment_x.
 First, companies were separated into groups according to their business segment. The CAGR values were then collected separately for each group. After that, a kernel density estimate was created for every selected segment. Kernel density estimation produces a smooth curve from the original observations. It is similar to a smoothed histogram, but separate bars are replaced by a continuous line.
 Each segment was shown with its own curve and colour. The areas under the curves were filled with partial transparency. This made it possible to compare several distributions on the same figure and to see where they overlap. The same horizontal scale was used for all five segments. Therefore, their positions, ranges, peaks, and tails can be compared directly.
 The graph should be interpreted through several features:
+                    
+
 •	the position of the peak;
 •	the width of the curve;
 •	the height of the curve;
 •	the length of the left and right tails;
 •	the overlap between different segments.
+                    
+
 The peak shows the CAGR range where the values are most concentrated. The width shows how different the observations are within the segment. The tails show whether some values are located far from the main part of the distribution.
 General Pattern
 The five segments have visibly different CAGR distributions.
+                    
+
 •	the fashion segment is concentrated mainly in the negative CAGR area. Its curve is narrow and has the highest peak
 •	the marketplace plus cloud segment is centred in the positive CAGR area. Its curve is wider and extends far into positive values
 •	the Food Delivery segment is concentrated close to zero and slightly above zero. Its distribution is narrower than the distributions of Marketplace + Cloud, Marketplace + Fintech, and Payments
 •	the Marketplace + Fintech segment has the widest visible range. Its curve extends far into both negative and positive CAGR values
 •	the Payments segment is centred close to zero. Its distribution overlaps strongly with Food Delivery, Marketplace + Cloud, and Marketplace + Fintech.
-These differences show that the CAGR values are not distributed in the same way across all business segments.
+
+                    
+                    These differences show that the CAGR values are not distributed in the same way across all business segments.
 Fashion
 The Fashion segment is represented by the orange curve.
 Its highest density is located at approximately −0.14, which corresponds to a CAGR of about −14%. This is the most common area of the distribution. The curve is mainly located between approximately −0.30 and 0.05. Most of the visible density is found in the negative part of the horizontal axis. The peak is much higher than the peaks of the other segments. It reaches a density of approximately 4.6. This does not mean that the Fashion segment contains the largest number of companies. It means that its CAGR values are strongly concentrated within a relatively narrow interval. The left side of the curve begins near approximately −0.35. Density then increases quickly as the curve approaches the main peak.
 After the peak near −14%, density decreases sharply. The curve approaches zero at a CAGR slightly above 0.05, or approximately 5%. The distribution is therefore narrow in comparison with most other segments. The observed CAGR values appear to be less spread out. The curve is also clearly shifted to the left of zero. This means that the main concentration of Fashion observations is located in the negative CAGR range.Only a small part of the curve is located above zero. Positive CAGR values appear to be less common in this segment than negative values.
 Among all five segments, Fashion is the only segment whose main peak is clearly located below zero.
-Food Delivery
+                    Food Delivery
+                    
+
 The Food Delivery segment is represented by the green curve.
 Its peak is located slightly above zero, at approximately 0.05. This corresponds to a CAGR of around 5%. The maximum density is approximately 2.5. The peak is lower than the Fashion peak, but higher than the peaks of Marketplace + Cloud, Marketplace + Fintech, and Payments.
 The visible distribution begins near approximately −0.30 and ends near approximately 0.4 Most of the density is located between approximately −0.15 and 0.30. This means that the central part of the distribution includes both negative and positive CAGR values. However, the highest part of the curve is located above zero. Positive values are more strongly represented around the main peak. The left side of the curve rises gradually from the negative CAGR area. The curve reaches its maximum near 5% and then decreases toward the positive side. The right tail extends farther from zero than the main negative part of the distribution. The curve remains visible until approximately 45%–50%.
 The distribution is wider than the Fashion distribution. Therefore, Food Delivery CAGR values appear to be more varied.
 At the same time, it is narrower than the Marketplace + Fintech distribution and slightly narrower than the Marketplace + Cloud and Payments distributions.
-Marketplace + Cloud
+
+                    
+                    Marketplace + Cloud
+
+
 The Marketplace + Cloud segment is represented by the blue curve.
 Its peak is located at approximately 0.16 to 0.18. This corresponds to a CAGR of around 16%–18%. This is the most positive peak among the five displayed distributions. The maximum density is approximately 1.8. The curve is lower than the curves for Fashion and Food Delivery. However, it is spread across a wider CAGR interval. The distribution begins near approximately −0.30 and extends to approximately 0.65. The central part of the curve is located mainly in the positive CAGR range. The highest density is observed between approximately 0.10 and 0.25. The curve crosses the zero point with a relatively high density. Therefore, values close to zero are also present. The negative tail is visible, but it is shorter than the positive tail. The curve extends farther to the right. The right side remains visible beyond 0.40 and approaches zero only near approximately 0.60–0.65. This indicates that the Marketplace + Cloud distribution contains a wide range of positive CAGR values.
 The curve is wider than the Fashion and Food Delivery curves. This shows that CAGR values within Marketplace + Cloud are more spread out.
 The distribution also overlaps strongly with Food Delivery, Payments, and Marketplace + Fintech, especially between approximately 0.00 and 0.35.
-Marketplace + Fintech
+
+                    Marketplace + Fintech
+
 The Marketplace + Fintech segment is represented by the red curve.
 Its peak is located at approximately 0.10, or about 10% CAGR. The maximum density is close to 1.5. This is one of the lowest peaks on the graph. The lower peak is connected with the large width of the curve. The observations are spread over a very wide interval instead of being concentrated around one narrow range. The visible distribution begins near approximately −0.65 and extends to approximately 0.80.
 This is the widest range among all five segments. The curve contains the longest negative tail. It remains visible far below −0.40 and approaches zero only near approximately −0.60. The right tail is also the longest. It remains visible above 0.60 and reaches approximately 0.80.
 The main part of the curve is located around positive CAGR values, but a substantial part of the distribution is also located below zero. The curve rises gradually from the far negative area. It reaches its maximum near 10% and then decreases gradually toward the positive tail.
 The left and right sides are both broad. This shows that the Marketplace + Fintech segment contains highly different CAGR values.
 Payments
-The Payments segment is represented by the purple curve.
+
+                    The Payments segment is represented by the purple curve.
+
 Its peak is located close to zero, approximately between 0.00 and 0.03. This corresponds to a CAGR between 0% and 3%. The maximum density is slightly above 2.0. The distribution begins near approximately −0.45 and extends to approximately 0.55. The central part of the curve covers both negative and positive CAGR values. The highest concentration is found close to zero.
 The curve rises from the negative CAGR area and reaches its maximum near zero. It then decreases gradually toward the positive side. The positive tail extends slightly farther than the negative tail. The Payments curve is wider than the Fashion and Food Delivery curves. It is also narrower than the Marketplace + Fintech distribution.A strong overlap can be seen between Payments and Food Delivery. Their curves are close between approximately −0.10 and 0.25. Payments also overlaps with Marketplace + Cloud. However, the Marketplace + Cloud peak is located farther to the right. The Payments distribution is therefore centred closer to zero than Marketplace + Cloud and Marketplace + Fintech.
 Some conclusion
@@ -3033,57 +3064,75 @@ Moreover, the graph shows smoothed distributions rather than individual observat
         plt.close(fig)
 
         st.markdown("""
-E-commerce Growth and Median Macroeconomic Trends
+
+                    E-commerce Growth and Median Macroeconomic Trends
 The figure compares the development of the e-commerce index with six macroeconomic indicators between 2015 and 2024.
 The following indicators are shown:
+                    
+
 	internet users;
 	account ownership;
 	mobile subscriptions;
 	GDP per capita;
 	foreign direct investment inflows;
 	urban population.
+                    
+
 The blue line represents the e-commerce index in every subplot. The orange dashed line represents one macroeconomic indicator.
 Method Used to Construct the Figure
+                    
 Several data transformation steps were used before the figure was created.
+                    
 First, the e-commerce data was aggregated by year. The original index contained more frequent observations, so the annual mean was calculated for every year.
 Second, the macroeconomic indicators were grouped by year. Since the dataset contains several countries, the median value across countries was calculated for each indicator and year.
 The median was used instead of the mean because it is less affected by countries with extremely large or extremely small values. Therefore, the orange line represents the general central trend across the countries included in the dataset.
 After the annual values were calculated, every series was rebased to 2015.
+
 The following formula was used:
+                    
 Index in year t = (Value in year t / Value in 2015) × 100
+                    
+
 As a result, the value for 2015 is equal to 100 for every series.
+                    
 A value above 100 means that the indicator increased compared with 2015. For example, a value of 120 means that the indicator is approximately 20% higher than its 2015 level.
 A value below 100 means that the indicator decreased compared with 2015.
 This transformation was required because the indicators are measured in different units. GDP per capita is measured in money, internet usage is measured as a percentage, and mobile subscriptions are measured using another scale. After rebasing, their relative changes can be compared on the same type of scale.
 The same e-commerce index is shown in every subplot.
-General Trend of the E-commerce Index
+
+                    General Trend of the E-commerce Index
 The index starts at 100 in 2015. A very small increase is observed in 2016.
 Between 2016 and 2019, the index increases steadily. It rises from approximately 100 to around 190 in 2018 and then reaches approximately 220 in 2019. The increase becomes much stronger after 2019. The index reaches approximately 350 in 2020. The highest point is observed in 2021, when the index reaches approximately 540. This means that the e-commerce index was more than five times higher than its 2015 level. After the 2021 peak, a sharp decline is observed. The index falls to approximately 240 in 2022.
 A further smaller decline is observed in 2023, when the index reaches approximately 210. In 2024, the index increases again to approximately 255. However, it remains far below the 2021 peak.
+
 Therefore, the general e-commerce pattern can be divided into four stages:
 	slow growth from 2015 to 2017;
 	stronger growth from 2018 to 2020;
 	a sharp peak in 2021;
 	a decline in 2022–2023 and a partial recovery in 2024.
-Internet Users
+
+                    Internet Users
 The first subplot compares the e-commerce index with the median share of internet users.
 The internet users indicator shows a mainly upward trend. It starts at 100 in 2015. A strong increase is observed in 2016, when the index reaches approximately 113. The indicator continues to rise gradually between 2016 and 2020. It reaches approximately 120 by 2020. A small decline is observed in 2021. The value falls from approximately 120 to around 117. After that, growth continues. The indicator increases in 2022, 2023, and 2024. 
 The highest value is observed in 2024, at approximately 123. This means that the median internet usage level was around 23% higher than in 2015..
 Both indicators generally increase between 2015 and 2020. However, their movements are not identical. The e-commerce index reaches its highest value in 2021, while the internet users indicator decreases slightly in the same year. After 2021, the e-commerce index falls strongly, while internet usage continues to increase.
 Therefore, the two series have a long-term upward direction before 2021, but the internet users indicator does not follow the sharp changes in the e-commerce index.
-Account Ownership
+
+                    Account Ownership
 The second subplot compares the e-commerce index with the median account ownership indicator.
 The account ownership series changes only slightly during the observed period. It starts at 100 in 2015 and remains at the same level in 2016. A small decline is observed in 2017. The value falls to approximately 99.5 and remains at this level until 2020. A clear increase is observed in 2021. The indicator rises to approximately 102.2. It then remains almost unchanged between 2021 and 2023. Another increase is observed in 2024, when the value reaches approximately 103.5.
 The step-like shape of the line should be noted. Long horizontal sections are visible because account ownership is not reported every year in the original data. Missing intermediate observations were filled during the preparation of the country-year panel.
 The total change in account ownership is small. By 2024, the indicator is only around 3.5% higher than in 2015. This differs strongly from the e-commerce index, which shows much larger changes. The sharp growth and decline of the e-commerce index are not repeated by the account ownership series.
 The only visible similarity is that both indicators increase in 2021. However, the size of the change is very different. Overall, account ownership remains relatively stable, while the e-commerce index changes strongly over time.
-Mobile Subscriptions
+
+                    Mobile Subscriptions
 The third subplot compares the e-commerce index with median mobile subscriptions.
 .It starts at 100 in 2015 and decreases slightly in 2016.A rise is observed in 2017, when the value reaches approximately 102. The indicator then falls sharply in 2018 to approximately 98, which is the lowest point in the series. A strong recovery is observed in 2019. The value increases to approximately 103. Another decline occurs in 2020, when the indicator returns to around 100.
 The indicator rises strongly again in 2021 and reaches approximately 105. A decline is observed in 2022, followed by renewed growth in 2023 and 2024.
 The highest value is reached in 2024, at approximately 106.5.
 Unlike internet usage, mobile subscriptions do not follow a continuous upward path. The series contains several short-term changes in direction. The e-commerce index and mobile subscriptions both increase strongly in 2021. However, similar movement is not observed during all other years. For example, mobile subscriptions decrease in 2018, while the e-commerce index continues to increase. In 2022, both series decline. After that, the e-commerce index decreases again in 2023, while mobile subscriptions begin to recover. Therefore, several periods of similar movement are visible, but the complete trends are different.
-GDP per Capita
+
+                    GDP per Capita
 GDP per capita starts at 100 in 2015 and increases slightly in 2016. A stronger increase is observed between 2016 and 2018. The indicator reaches approximately 117 in 2018. After that, it declines in 2019 and again slightly in 2020. However, the value remains above its 2015 level. A sharp increase is observed in 2021. The indicator reaches approximately 124, which is the highest point in the series. GDP per capita then falls in 2022, 2023, and 2024. The 2024 value is approximately 110, which remains around 10% above the 2015 level. The e-commerce index and GDP per capita both reach their highest point in 2021.
 Both series also decline sharply in 2022. This is the clearest period of similar movement in the figure. However, the earlier years show a less direct relationship. GDP per capita rises strongly in 2017–2018, while the e-commerce index increases more gradually.In 2024, the e-commerce index begins to recover, while GDP per capita continues to decline.
 FDI Inflow
@@ -3169,14 +3218,17 @@ Overall, the figure suggests that some indicators move in the same direction as 
 
         st.markdown("""
 The figure compares an equal-weighted portfolio of 19 e-commerce companies with the general e-commerce index. Both series were rebased to 2015 = 100, so their relative growth can be compared.
-Period before 2020
+
+                    Period before 2020
 From 2015 to 2016, both series remained close to their initial level of 100 and showed only small changes.
 Starting from 2017, both lines began to grow. The equal-weighted portfolio increased faster than the e-commerce index. By the end of 2019, the portfolio had reached approximately 350–370, while the index was close to 240–250.
 Both series experienced several short declines during this period, especially around 2018 and early 2019. However, the general trend before 2020 was positive.
-from 2020 to 2024
+
+                    from 2020 to 2024
 At the beginning of 2020, both series declined. This fall was followed by very strong growth during the shaded COVID-19 period. The equal-weighted portfolio increased much faster. It rose from approximately 300–400 in early 2020 to more than 1,000 in 2021. The e-commerce index also increased, but its peak was lower, at approximately 600–650.
 Both series reached their highest levels during 2021. After that, a strong decline was observed. During 2022, the portfolio fell to approximately 300–400, while the index declined to around 200–250. The decrease continued into early 2023. From 2023 to 2024, both series started to recover. The portfolio generally remained above the e-commerce index and showed stronger growth.
-after 2024
+
+                    after 2024
 During the second half of 2024 and the beginning of 2025, both series continued to increase. By the end of the observed period, both series remained above their 2015 levels. However, neither series returned to its 2021 peak.
 The two series generally moved in the same direction. Both showed gradual growth before 2020, rapid growth during 2020–2021, a strong decline during 2022, and a recovery after 2023.
 
@@ -3240,58 +3292,97 @@ The two series generally moved in the same direction. Both showed gradual growth
         plt.close(fig)
 
         st.markdown("""
-Growth of a $1 Equal-Weighted Investment by Region
+
+                    Growth of a $1 Equal-Weighted Investment by Region
 The figure compares the performance of equal-weighted portfolios of e-commerce companies from six regions:
+                   
 •	Asia Pacific;
+                    
 •	Europe;
+                    
 •	Greater China;
+                    
 •	India;
+                    
 •	Latin America;
+                    
 •	North America.
+                    
+                    
 All regional portfolios were rebased to 2015 = 100. Therefore, the lines show how the value of the same initial investment changed over time.
-How the Regional Portfolios Were Calculated
+
+                    How the Regional Portfolios Were Calculated
 First, the stock-price history of every company was converted into a normalized growth series.
 For each company, the adjusted closing price on every date was divided by its adjusted closing price at the beginning of the period:
 Company growth at time t = Adjusted closing price at time t / Adjusted closing price at the beginning
 A value of 1 means that the stock price remained at its initial level. A value of 2 means that it became twice as high, while a value of 0.5 means that it fell to half of its initial level.
-After that, companies were grouped by region. The same weight was assigned to every company within each regional group. This means that a hypothetical $1 investment was divided equally between all available companies in the region. For example, when a region contained five companies, $0.20 was assigned to each company.
+After that, companies were grouped by region. 
+
+The same weight was assigned to every company within each regional group. 
+This means that a hypothetical 1dollar investment was divided equally between all available companies in the region.
+For example, when a region contained five companies, 0.20dollars was assigned to each company.
+
 The regional portfolio value was calculated as the average of the normalized company growth values:
 Regional portfolio value at time t = Sum of company growth values / Number of companies in the region
+                    
 Finally, the result was multiplied by 100 so that every regional portfolio started from 100 in 2015:
 Regional index at time t = Regional portfolio value at time t × 100
 So
-•	an index value of 100 corresponds to the original $1 investment;
-•	an index value of 200 corresponds to approximately $2;
-•	an index value of 500 corresponds to approximately $5;
-•	an index value of 1,000 corresponds to approximately $10;
-•	an index value of 2,000 corresponds to approximately $20.
-Period Before 2020
-Between 2015 and 2016, all regional portfolios remained relatively close to their initial value of 100. Only small increases and decreases were observed. Starting from 2017, the regional trends became more different.
-North America showed the strongest growth before 2020. Its index increased from around 100 in 2015 to approximately 600–650 by 2019. A $1 investment would therefore have grown to approximately $6–$6.50.
-Latin America also increased strongly. By 2019, its index was close to 400–500, which corresponds to a portfolio value of approximately $4–$5.
+                    
+•	an index value of 100 corresponds to the original 1dollar investment;
+                    
+•	an index value of 200 corresponds to approximately 2dollar;
+                    
+•	an index value of 500 corresponds to approximately 5dollar;
+                    
+•	an index value of 1,000 corresponds to approximately 10dollar;
+                    
+•	an index value of 2,000 corresponds to approximately 20dollar.
+                    
+
+                    Period Before 2020
+Between 2015 and 2016, all regional portfolios remained relatively close to 
+their initial value of 100. Only small increases and decreases were observed. 
+    Starting from 2017, the regional trends became more different.
+North America showed the strongest growth before 2020. Its index increased from around 100 in 2015 to approximately 600–650 by 2019. 
+A 1 dollar investment would therefore have grown to approximately 6–6.50 dollars.
+Latin America also increased strongly. By 2019, its index was close to 400–500, 
+which corresponds to a portfolio value of approximately 4–5 dolars.
 Europe showed moderate growth. Its index increased to approximately 200–250 by 2019.
 India also followed an upward trend and reached approximately 250 by the end of 2019.
 Greater China grew more slowly and remained mostly between approximately 100 and 150 before 2020.
-Asia Pacific showed the weakest performance during this period. Its index generally remained below 100 after 2016 and was close to approximately 40–60 by 2019.
-Period From 2020 to 2024
+Asia Pacific showed the weakest performance during this period. Its index generally remained below 100 
+after 2016 and was close to approximately 40–60 by 2019.
+
+                    Period From 2020 to 2024
 The largest differences between regions appeared during this period.
-North America increased very strongly during 2020 and 2021. Its index rose above 2,000 and reached a maximum of approximately 2,200–2,300.
-This means that the original $1 investment would have been worth approximately $22–$23 at the highest point.
-However, a sharp decline was observed in 2022. The North American index fell to approximately 500–700. A partial recovery followed during 2023 and 2024, and the index reached approximately 900–1,000 during parts of 2024.
-Latin America also showed strong growth during 2020 and 2021. Its index increased above 1,500 in 2021. It then declined to approximately 700–900 during 2022.
-India increased more gradually. Its index reached approximately 600 in 2021 and around 800 in late 2021. A decline followed in 2022, when the value fell to approximately 450–550. After that, a new upward trend was observed. The Indian portfolio increased through 2023 and 2024 and approached approximately 900–1,000 by the end of 2024.
+North America increased very strongly during 2020 and 2021. Its index rose above 2,000 
+and reached a maximum of approximately 2,200–2,300.
+This means that the original $1 investment would have been worth approximately 22–23 dollars at the highest point.
+However, a sharp decline was observed in 2022. The North American index fell to approximately 500–700. 
+A partial recovery followed during 2023 and 2024, and the index reached approximately 900–1,000 during parts of 2024.
+Latin America also showed strong growth during 2020 and 2021. Its index increased above 1,500 in 2021. 
+It then declined to approximately 700–900 during 2022.
+India increased more gradually. Its index reached approximately 600 in 2021 and around 800 in late 2021.
+ A decline followed in 2022, when the value fell to approximately 450–550. After that, a new upward trend was observed. The Indian portfolio increased through 2023 and 2024 and approached approximately 900–1,000 by the end of 2024.
 Europe reached its highest value of approximately 400 during 2021. After that, the European portfolio followed a mainly downward trend. Its index fell to approximately 150 in 2022 and remained close to 100–150 during 2023 and 2024. This means that most of the earlier growth had been lost by the end of the period.
 Greater China also reached a local maximum during 2021, at approximately 250–300. It then declined during 2022. From 2022 to 2024, the index generally remained close to approximately 100–150. Therefore, the final value was only slightly above the original 2015 level.
 Asia Pacific remained the lowest regional portfolio during most of the period. Its index was generally below 100 and often close to approximately 40–70.
-After 2024
+
+                    After 2024
 At the end of 2024 and the beginning of 2025, different regional movements were observed.
-Latin America remained the highest regional portfolio for most of this final period. However, a decline was observed near the beginning of 2025. Its index fell from approximately 1,650–1,700 to around 1,350–1,450.
-North America increased sharply near the end of 2024 and briefly reached approximately 1,400–1,500. A small decline followed, and the final value was close to approximately 1,350–1,400.
-India continued its upward trend and reached approximately 1,050 by the beginning of 2025. This corresponds to a value of approximately $10.50 for the original $1 investment.
+Latin America remained the highest regional portfolio for most of this final period. 
+However, a decline was observed near the beginning of 2025. Its index fell 
+from approximately 1,650–1,700 to around 1,350–1,450.
+North America increased sharply near the end of 2024 and briefly reached approximately 1,400–1,500. 
+A small decline followed, and the final value was close to approximately 1,350–1,400.
+India continued its upward trend and reached approximately 1,050 by the beginning of 2025.
+                     This corresponds to a value of approximately $10.50 for the original $1 investment.
 Europe, Greater China, and Asia Pacific remained much lower.
 Europe finished close to approximately 100, which is close to the initial $1 value.
 Greater China also ended close to approximately 100–120.
-Asia Pacific finished below its initial level, at approximately 50–60. This means that the original $1 investment would have been worth only around $0.50–$0.60.
+Asia Pacific finished below its initial level, at approximately 50–60. 
+This means that the original 1 dollar investment would have been worth only around 0.50–0.60.
 
         """)
 
@@ -3401,9 +3492,7 @@ Latin America contains the smallest sample, with 15 observations, and has the hi
 
         """)
 
-# ══════════════════════════════════════════
 # 7. HYPOTHESIS TESTING
-# ══════════════════════════════════════════
 
 elif page == "Hypothesis Testing":
     st.title("Hypothesis Testing")
@@ -3414,23 +3503,244 @@ elif page == "Hypothesis Testing":
         "H2: Volatility Developed vs Emerging"
     ])
     with tab:
-        st.markdown("""
-Before the hypotheses were tested, the original tables were transformed into several analytical datasets. The company description table was first merged with the company-level market metrics by company_id. All date columns used in the calculations were converted to the datetime format. This included daily stock-price dates, history_start, history_end, and founded_date. Several foundation dates contained 00 instead of a known month or day. These unknown parts were replaced with 01 so that the values could be stored as valid dates. The daily stock-price observations were then sorted by company and date. Adjusted closing prices were used for return calculations because they include the effect of stock splits and other changes in the price history.
-The company metrics table already contained several transformed market indicators, including cagr, cumulative_return, annualized_volatility, and max_drawdown. These indicators were retained in the merged company dataset. Missing values in last_close, cumulative_return, cagr, return_1y, and return_90d were reconstructed from the daily stock-price table. Cumulative return was calculated as the last price divided by the first price, minus one. CAGR was calculated from the first price, the last price, and the length of the available price history. The one-year and 90-day returns were calculated from adjusted closing prices. Annualized volatility was used as the main company-level measure of stock-price variability, while maximum drawdown showed the largest fall from a previous price peak.
-For the analysis of revenue growth and stock returns, two additional annual variables were calculated. First, the financial observations were sorted by company and fiscal year. Annual revenue growth was then calculated separately for every company as:
-Annual revenue growth = (Revenue in the current year / Revenue in the previous year) − 1
-The calculation was performed inside each company group, so revenue values from different companies were not compared with each other. The first available financial year of every company had no previous observation and therefore received a missing growth value.
-Annual stock return was calculated from the daily adjusted closing prices. For every company and calendar year, the first and last available adjusted closing prices were selected. The return was calculated as:
-Annual stock return = (Last adjusted closing price of the year / First adjusted closing price of the year) − 1
-The annual revenue growth table and the annual stock return table were then merged by ticker and year. Observations without both values were removed because a correlation could not be calculated for incomplete pairs. The final table used for this part of the analysis contained 121 company-year observations from 43 companies. Several observations from the same company could be included because the calculations were performed for different years.
-The macroeconomic dataset required a separate transformation because it was originally stored in long format. The name of each indicator was stored in indicator_name, while all numerical values were stored together in the value column. The table was transformed into wide format. After this transformation, every row represented one country-year pair, and every macroeconomic indicator was placed in a separate column. This made it possible to analyse GDP per capita, internet usage, account ownership, population, and other indicators separately.
-Missing macroeconomic values were filled only within the same country. Forward fill was used when an earlier observation was available, while backward fill was used when the first available observation started after the beginning of the selected period. For Argentina, gdp_total_usd was missing, but GDP per capita and total population were available. Total GDP was therefore reconstructed as:
-Total GDP = GDP per capita × Population
-Country clustering was then used to create a new country-group variable for the volatility hypothesis. Four indicators were selected: gdp_per_capita_usd, internet_users_pct, account_ownership_pct_adult, and urban_population_pct. Since these variables were measured on different scales, they were standardized before clustering. For every feature, its mean was subtracted and the result was divided by its standard deviation. After standardization, each indicator had a comparable scale and no variable was allowed to dominate the clustering only because its original numerical values were larger.
-The standardized country data was divided into two groups with K-Means clustering. The number of clusters was set to two. The cluster with the higher average GDP per capita was labelled Developed, while the other cluster was labelled Emerging. The resulting country classification was then merged with the company data through the country code. As a result, every company received a country-group label that could be compared with its annualized stock volatility.
-These transformations produced two final datasets for hypothesis testing. The first dataset contained annual revenue growth and annual stock return for matched company-year observations. The second dataset contained company-level annualized volatility together with the developed or emerging classification of the company’s country. All transformations were completed before the statistical tests were performed.
+        st.header("Data Transformation")
 
-""")
+        st.markdown("""
+        Before the hypotheses were tested, the original tables were transformed into
+        several analytical datasets.
+        """)
+
+        # Краткое визуальное резюме
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            st.metric(
+                label="Company-year observations",
+                value="121"
+            )
+
+        with col2:
+            st.metric(
+                label="Companies",
+                value="43"
+            )
+
+        with col3:
+            st.metric(
+                label="Final analytical datasets",
+                value="2"
+            )
+
+        st.divider()
+        st.subheader("1. Company and Market Data Preparation")
+
+        with st.container(border=True):
+            st.markdown("""
+            The company description table was first merged with the company-level
+            market metrics by `company_id`.
+
+            All date columns used in the calculations were converted to the datetime
+            format. This included daily stock-price dates, `history_start`,
+            `history_end`, and `founded_date`.
+
+            Several foundation dates contained `00` instead of a known month or day.
+            These unknown parts were replaced with `01` so that the values could be
+            stored as valid dates.
+
+            The daily stock-price observations were then sorted by company and date.
+            Adjusted closing prices were used for return calculations because they
+            include the effect of stock splits and other changes in the price history.
+            """)
+
+        st.markdown("#### Market Performance Indicators")
+
+        with st.container(border=True):
+            st.markdown("""
+            The company metrics table already contained several transformed market
+            indicators, including `cagr`, `cumulative_return`,
+            `annualized_volatility`, and `max_drawdown`.
+
+            These indicators were retained in the merged company dataset.
+
+            Missing values in `last_close`, `cumulative_return`, `cagr`,
+            `return_1y`, and `return_90d` were reconstructed from the daily
+            stock-price table.
+
+            Cumulative return was calculated as the last price divided by the first
+            price, minus one.
+
+            CAGR was calculated from the first price, the last price, and the length
+            of the available price history.
+
+            The one-year and 90-day returns were calculated from adjusted closing
+            prices.
+
+            Annualized volatility was used as the main company-level measure of
+            stock-price variability, while maximum drawdown showed the largest fall
+            from a previous price peak.
+            """)
+
+        st.divider()
+
+        st.subheader("2. Annual Revenue Growth")
+
+        with st.container(border=True):
+            st.markdown("""
+            For the analysis of revenue growth and stock returns, two additional
+            annual variables were calculated.
+
+            First, the financial observations were sorted by company and fiscal year.
+
+            Annual revenue growth was then calculated separately for every company as:
+            """)
+
+            st.info(
+                "Annual revenue growth = "
+                "(Revenue in the current year / Revenue in the previous year) − 1"
+            )
+
+            st.markdown("""
+            The calculation was performed inside each company group, so revenue
+            values from different companies were not compared with each other.
+
+            The first available financial year of every company had no previous
+            observation and therefore received a missing growth value.
+            """)
+        st.subheader("3. Annual Stock Return")
+
+        with st.container(border=True):
+            st.markdown("""
+            Annual stock return was calculated from the daily adjusted closing prices.
+
+            For every company and calendar year, the first and last available
+            adjusted closing prices were selected.
+
+            The return was calculated as:
+            """)
+
+            st.info(
+                "Annual stock return = "
+                "(Last adjusted closing price of the year / "
+                "First adjusted closing price of the year) − 1"
+            )
+
+            st.markdown("""
+            The annual revenue growth table and the annual stock return table were
+            then merged by ticker and year.
+
+            Observations without both values were removed because a correlation could
+            not be calculated for incomplete pairs.
+
+            The final table used for this part of the analysis contained 121
+            company-year observations from 43 companies.
+
+            Several observations from the same company could be included because the
+            calculations were performed for different years.
+            """)
+
+        st.divider()
+        st.subheader("4. Macroeconomic Data Transformation")
+
+        with st.container(border=True):
+            st.markdown("""
+            The macroeconomic dataset required a separate transformation because it
+            was originally stored in long format.
+
+            The name of each indicator was stored in `indicator_name`, while all
+            numerical values were stored together in the `value` column.
+
+            The table was transformed into wide format.
+
+            After this transformation, every row represented one country-year pair,
+            and every macroeconomic indicator was placed in a separate column.
+
+            This made it possible to analyse GDP per capita, internet usage, account
+            ownership, population, and other indicators separately.
+            """)
+
+        st.markdown("#### Missing Macroeconomic Values")
+
+        with st.container(border=True):
+            st.markdown("""
+            Missing macroeconomic values were filled only within the same country.
+
+            Forward fill was used when an earlier observation was available, while
+            backward fill was used when the first available observation started after
+            the beginning of the selected period.
+
+            For Argentina, `gdp_total_usd` was missing, but GDP per capita and total
+            population were available.
+
+            Total GDP was therefore reconstructed as:
+            """)
+
+            st.info("Total GDP = GDP per capita × Population")
+
+        st.divider()
+
+        st.subheader("5. Country Clustering")
+
+        with st.container(border=True):
+            st.markdown("""
+            Country clustering was then used to create a new country-group variable
+            for the volatility hypothesis.
+
+            Four indicators were selected: `gdp_per_capita_usd`,
+            `internet_users_pct`, `account_ownership_pct_adult`, and
+            `urban_population_pct`.
+
+            Since these variables were measured on different scales, they were
+            standardized before clustering.
+
+            For every feature, its mean was subtracted and the result was divided by
+            its standard deviation.
+
+            After standardization, each indicator had a comparable scale and no
+            variable was allowed to dominate the clustering only because its original
+            numerical values were larger.
+            """)
+
+        st.markdown("#### K-Means Classification")
+
+        with st.container(border=True):
+            st.markdown("""
+            The standardized country data was divided into two groups with K-Means
+            clustering.
+
+            The number of clusters was set to two.
+
+            The cluster with the higher average GDP per capita was labelled
+            `Developed`, while the other cluster was labelled `Emerging`.
+
+            The resulting country classification was then merged with the company
+            data through the country code.
+
+            As a result, every company received a country-group label that could be
+            compared with its annualized stock volatility.
+            """)
+
+        st.divider()
+
+        st.subheader("6. Final Datasets for Hypothesis Testing")
+
+        with st.container(border=True):
+            st.markdown("""
+            These transformations produced two final datasets for hypothesis testing.
+
+            The first dataset contained annual revenue growth and annual stock return
+            for matched company-year observations.
+
+            The second dataset contained company-level annualized volatility together
+            with the developed or emerging classification of the company’s country.
+
+            All transformations were completed before the statistical tests were
+            performed.
+            """)
+
+        st.success(
+            "The transformed datasets are ready for the two hypothesis tests."
+        )
+
     # H1
     with tab_h1:
         st.subheader("H1: Annual revenue growth is positively associated with annual stock returns")
