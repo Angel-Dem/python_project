@@ -441,11 +441,6 @@ def cohen_d(g1, g2):
     pooled = np.sqrt(((n1-1)*g1.var(ddof=1)+(n2-1)*g2.var(ddof=1))/(n1+n2-2))
     return (g1.mean()-g2.mean())/pooled
 
-
-# ──────────────────────────────────────────
-# LOAD
-# ──────────────────────────────────────────
-
 df_comp, df_metrics, df_ecommerce, df_fin_raw, df_macro, df_stick = load_data()
 df_filled = prepare_company_data(df_comp, df_metrics, df_stick)
 df_fin = prepare_financial_data(df_fin_raw)
@@ -455,9 +450,9 @@ df_companies = create_company_analysis_dataset(df_filled, df_fin, macro_wide, co
 df_stock_copy = prepare_stock_data(df_stick, df_filled, country_df)
 df = df_comp.merge(df_metrics, on="company_id", how="inner")
 
-# ──────────────────────────────────────────
+
 # NAVIGATION
-# ──────────────────────────────────────────
+
 
 st.sidebar.title("📈 E-commerce IPO Analysis")
 page = st.sidebar.radio("Navigation", [
@@ -468,12 +463,12 @@ page = st.sidebar.radio("Navigation", [
     "Basic Plots",
     "Detailed Overview",
     "Hypothesis Testing",
+    "API",
     "Discussion"
 ])
 
-# ══════════════════════════════════════════
 # 1. ABSTRACT
-# ══════════════════════════════════════════
+
 
 if page == "Abstract":
     st.title("E-commerce IPO Performance: Macroeconomic and Regional Drivers")
@@ -504,9 +499,8 @@ The hypotheses are evaluated using correlation analysis, company-level bootstrap
     *Author: individual project*
     """)
 
-# ══════════════════════════════════════════
+
 # 2. DATASET DESCRIPTION
-# ══════════════════════════════════════════
 
 elif page == "Dataset Description":
     st.title("Dataset Description")
@@ -705,9 +699,8 @@ elif page == "Dataset Description":
     st.subheader("Sample rows after initial cleaning")
     st.dataframe(df_filled.head(5), use_container_width=True)
 
-# ══════════════════════════════════════════
+
 # 3. DESCRIPTIVE STATISTICS
-# ══════════════════════════════════════════
 
 elif page == "Descriptive Statistics":
     st.title("Descriptive Statistics")
@@ -907,9 +900,7 @@ The only variable with an approximately symmetric distribution is fiscal_year, w
         st.caption("""Missed values""")
   
 
-    # ─────────────────────────────
     # DESCRIPTIVE STATISTICS
-    # ─────────────────────────────
 
     st.subheader("2. Descriptive statistics for selected numerical fields")
 
@@ -1347,10 +1338,7 @@ A mean GDP value can then be compared with other GDP values. A mean internet usa
 """)
     
 
-    # ─────────────────────────────
     # SKEWNESS ANALYSIS
-    # ─────────────────────────────
-
     st.subheader("4. Distribution analysis: skewness")
 
     st.markdown("""
@@ -1450,10 +1438,8 @@ A mean GDP value can then be compared with other GDP values. A mean internet usa
                     financial data, macro indicators are usually cleaner, but their distributions may still be asymmetric
                     because countries are heterogeneous in income level, population structure and economic development.""")
 
-# ══════════════════════════════════════════
-# 4. DATA CLEANUP
-# ══════════════════════════════════════════
 
+# 4. DATA CLEANU
 elif page == "Data Cleanup":
     st.title("Data Cleanup")
 
@@ -1469,10 +1455,6 @@ elif page == "Data Cleanup":
     The goal was not only to remove missing values, but also to understand why they appeared
     and whether they could be correctly reconstructed from other available columns.
     """)
-
-    # ─────────────────────────────────────
-    # Small display helpers used only on this page
-    # ─────────────────────────────────────
 
     def show_value_comparison(title, calculated, dataset_value):
         """Display one formula-verification result as a compact card."""
@@ -1539,9 +1521,8 @@ elif page == "Data Cleanup":
         "Macroeconomic Indicators"
     ])
 
-    # ═════════════════════════════════════
+
     # 4.1 Company + Market Metrics
-    # ═════════════════════════════════════
 
     with tab_company:
         st.header("4.1 Company and Market Performance Data")
@@ -1603,9 +1584,8 @@ elif page == "Data Cleanup":
                 $$
                 """)
 
-        # ─────────────────────────────────
+
         # Formula verification on one sample
-        # ─────────────────────────────────
 
         st.subheader("Formula verification")
 
@@ -1762,11 +1742,6 @@ elif page == "Data Cleanup":
             calc_1y,
             actual_1y
         )
-
-        # ─────────────────────────────────
-        # Full-dataset verification
-        # ─────────────────────────────────
-
         st.subheader(
             "Final formula check on all companies with available values"
         )
@@ -1969,9 +1944,7 @@ elif page == "Data Cleanup":
                 "No missing values remain in the cleaned company dataset."
             )
 
-    # ═════════════════════════════════════
     # 4.2 Financial Metrics
-    # ═════════════════════════════════════
 
     with tab_financial:
         st.header("4.2 Financial Metrics Data")
@@ -2321,10 +2294,8 @@ elif page == "Data Cleanup":
             "No missing values remain in the cleaned financial dataset."
         )
 
-    # ═════════════════════════════════════
+   
     # 4.3 Macroeconomic Indicators
-    # ═════════════════════════════════════
-
     with tab_macro:
         st.header("4.3 Macroeconomic Indicators")
 
@@ -2376,10 +2347,8 @@ elif page == "Data Cleanup":
         )
 
 
-# ══════════════════════════════════════════
-# 5. BASIC PLOTS
-# ══════════════════════════════════════════
 
+# 5. BASIC PLOTS
 elif page == "Basic Plots":
     st.title("Basic Plots")
 
@@ -2389,9 +2358,8 @@ elif page == "Basic Plots":
     between groups before moving to a more detailed analysis.
     """)
 
-    # ─────────────────────────────────────
+
     # 1. CAGR Histogram
-    # ─────────────────────────────────────
     st.subheader("1. CAGR Distribution")
 
     fig, axes = plt.subplots(1, 2, figsize=(14, 5))
@@ -2435,9 +2403,7 @@ Most CAGR values are concentrated close to zero, mainly between approximately �
 
     """)
 
-    # ─────────────────────────────────────
     # 2. Average Internet Usage Over Time
-    # ─────────────────────────────────────
     st.subheader("2. Average Internet Usage Over Time")
 
     internet_yearly = (
@@ -2471,10 +2437,7 @@ Most CAGR values are concentrated close to zero, mainly between approximately �
 It is the average share of internet users across the countries in the dataset from 2010 to 2025. The values were grouped by year, and the mean internet usage percentage was calculated for each year. A clear upward trend can be observed between 2010 and 2024. Average internet usage increased from approximately 58% in 2010 to about 88% in 2024. The growth was gradual throughout most of the period. Faster increases can be seen between 2012 and 2016 and again between 2017 and 2020.
 The highest value was reached in 2024. In 2025, the average decreased to approximately 81%. This final decline should be interpreted carefully because the 2025 data may be incomplete or may contain observations for fewer countries than the previous years. 
     """)
-
-    # ─────────────────────────────────────
     # 3. Average Operating Margin by Fiscal Year
-    # ─────────────────────────────────────
     st.subheader("3. Average Operating Margin by Fiscal Year")
 
     yearly = (
@@ -2526,9 +2489,7 @@ The results for 2025 and 2026 should be interpreted carefully if these years con
 
     """)
 
-    # ─────────────────────────────────────
     # 4. Operating Margin by R&D Disclosure
-    # ─────────────────────────────────────
     st.subheader("4. Operating Margin by R&D Disclosure")
 
     plot_df = df_fin[
@@ -2580,9 +2541,8 @@ In both groups, many operating margins are located close to zero, so the graph d
 
     """)
 
-    # ─────────────────────────────────────
+
     # 5. Revenue and Assets by Fiscal Year
-    # ─────────────────────────────────────
     st.subheader("5. Average Revenue and Assets by Fiscal Year")
 
     yearly_metrics = (
@@ -2652,9 +2612,8 @@ In 2026, both indicators declined sharply and became close to each other at appr
 
     """)
 
-# ══════════════════════════════════════════
+
 # 6. DETAILED OVERVIEW
-# ══════════════════════════════════════════
 
 elif page == "Detailed Overview":
     st.title("Detailed Overview")
@@ -2799,9 +2758,8 @@ elif page == "Detailed Overview":
         "CAGR by Region"
     ])
 
-    # ─────────────────────────────────────
+
     # TAB 1: CAGR by Segment
-    # ─────────────────────────────────────
 
     with tab1:
         st.subheader("CAGR Distribution by Business Segment")
@@ -2932,9 +2890,7 @@ Moreover, the graph shows smoothed distributions rather than individual observat
 
         """)
 
-    # ─────────────────────────────────────
     # TAB 2: E-commerce vs Macro
-    # ─────────────────────────────────────
 
     with tab2:
         st.subheader("E-commerce Growth and Macroeconomic Trends")
@@ -3147,10 +3103,8 @@ Overall, the figure suggests that some indicators move in the same direction as 
 
         """)
 
-    # ─────────────────────────────────────
-    # TAB 3: Portfolio vs E-commerce Index
-    # ─────────────────────────────────────
 
+    # TAB 3: Portfolio vs E-commerce Index
     with tab3:
         st.subheader("Equal-Weighted Portfolio vs E-commerce Index")
 
@@ -3234,9 +3188,7 @@ The two series generally moved in the same direction. Both showed gradual growth
 
         """)
 
-    # ─────────────────────────────────────
     # TAB 4: Portfolio by Region
-    # ─────────────────────────────────────
 
     with tab4:
         st.subheader("Equal-Weighted Portfolio Growth by Region")
@@ -3386,9 +3338,7 @@ This means that the original 1 dollar investment would have been worth only arou
 
         """)
 
-    # ─────────────────────────────────────
     # TAB 5: CAGR by Region
-    # ─────────────────────────────────────
 
     with tab5:
         st.subheader("CAGR Distribution by Region")
@@ -4301,9 +4251,36 @@ Overall, the hypothesis was not supported by the statistical test. Emerging coun
               
 """)
 
-# ══════════════════════════════════════════
-# 8. DISCUSSION
-# ══════════════════════════════════════════
+elif page == "API":
+    st.title("API")
+
+    api_url = "https://python-project-h4q4.onrender.com/"
+
+    st.markdown("""
+    The project includes a REST API developed with FastAPI.
+
+    The API provides:
+
+    - a GET endpoint for filtering and paginating annual financial records;
+    - a POST endpoint for creating a new annual financial record;
+    """)
+
+    st.link_button(
+        "Open REST API documentation",
+        f"{api_url}/docs"
+    )
+
+    st.subheader("Available endpoints")
+
+    st.code(
+        "GET /financials?ticker=AMZN&year_from=2020&limit=10",
+        language="text"
+    )
+
+    st.code(
+        "POST /financials",
+        language="text"
+    )
 
 elif page == "Discussion":
     st.title("Discussion")
