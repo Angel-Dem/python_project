@@ -7,7 +7,7 @@ import seaborn as sns
 from scipy import stats
 from scipy.cluster.vq import kmeans, vq
 import statsmodels.api as sm
-from sklearn.preprocessing import StandardScaler
+#from sklearn.preprocessing import StandardScaler
 from matplotlib.gridspec import GridSpec
 import warnings
 warnings.filterwarnings("ignore")
@@ -4176,6 +4176,7 @@ Because several yearly observations belonged to the same companies, an additiona
 
                 for market_type, color in [
                     ("Developed", "steelblue"),
+
                     ("Emerging", "coral")
                 ]:
                     data = vol_by_year[
