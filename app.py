@@ -4255,7 +4255,7 @@ Overall, the hypothesis was not supported by the statistical test. Emerging coun
 elif page == "API":
     st.title("API")
 
-    api_url = "https://python-project-h4q4.onrender.com/"
+    api_url = "https://python-project-h4q4.onrender.com"
 
     st.markdown("""
     The project includes a REST API developed with FastAPI.
