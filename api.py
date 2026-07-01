@@ -8,6 +8,7 @@ import pandas as pd
 
 from fastapi import FastAPI, HTTPException, Query, status
 from pydantic import BaseModel, ConfigDict, Field
+from fastapi.responses import RedirectResponse
 
 
 # ─────────────────────────────────────────────
@@ -117,17 +118,9 @@ app = FastAPI(
     version="1.0.0"
 )
 
-
-@app.get("/")
+@app.get("/", include_in_schema=False)
 def root():
-    return {
-        "message": "Global E-commerce Financials API",
-        "available_endpoints": {
-            "GET": "/financials",
-            "POST": "/financials",
-            "documentation": "/docs"
-        }
-    }
+    return RedirectResponse(url="/docs")
 
 
 
